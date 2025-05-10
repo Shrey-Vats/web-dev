@@ -1,0 +1,928 @@
+/* Premium Tea Shop - Enhanced CSS with Animations and Effects */
+
+/* Import beautiful fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Libre+Franklin:wght@300;400;500;600&display=swap');
+
+/* CSS Reset with smooth scrolling */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Premium color palette */
+  --primary: #8D5B4C;
+  --primary-dark: #6A4436;
+  --primary-light: #BF9D8C;
+  --accent: #D4AF37;
+  --accent-light: #F0E6C0;
+  --text-dark: #2C2624;
+  --text-light: #FFF8F0;
+  --background: #FDFBF7;
+  --overlay-dark: rgba(33, 25, 21, 0.7);
+  
+  /* Typography scales */
+  --h1-size: clamp(2.5rem, 5vw, 4.5rem);
+  --h2-size: clamp(1.75rem, 3vw, 2.5rem);
+  --body-large: clamp(1.125rem, 1.5vw, 1.5rem);
+  --body: clamp(1rem, 1vw, 1.125rem);
+  --body-small: clamp(0.875rem, 0.9vw, 1rem);
+  
+  /* Spacing */
+  --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+  --space-sm: clamp(0.75rem, 1.5vw, 1.25rem);
+  --space-md: clamp(1.5rem, 3vw, 2.5rem);
+  --space-lg: clamp(2.5rem, 5vw, 5rem);
+  --space-xl: clamp(4rem, 8vw, 8rem);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Libre Franklin', sans-serif;
+  line-height: 1.7;
+  color: var(--text-dark);
+  background-color: var(--background);
+  overflow-x: hidden;
+}
+
+/* Background with parallax effect and gradient overlay */
+.bg-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(var(--overlay-dark), var(--overlay-dark)),
+    url('./assets/chaipatti.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  z-index: -1;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Header with glass morphism effect */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-md);
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+.header.scrolled {
+  padding: var(--space-xs) var(--space-md);
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--primary);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.logo img {
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+  padding: 0.125rem;
+  width: 3rem;
+  height: 3rem;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.logo:hover img {
+  transform: rotate(15deg);
+}
+
+/* Navigation with hover effects */
+.nav-menu {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.nav-menu a {
+  position: relative;
+  text-decoration: none;
+  color: var(--primary);
+  font-weight: 500;
+  font-size: var(--body);
+  padding: var(--space-xs) 0;
+  transition: color 0.3s ease;
+}
+
+.nav-menu a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.nav-menu a:hover {
+  color: var(--primary-dark);
+}
+
+.nav-menu a:hover::after {
+  width: 100%;
+}
+
+/* Mobile menu button with animation */
+.mobile-menu-btn {
+  display: block;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 101;
+}
+
+.menu-icon {
+  width: 30px;
+  height: 20px;
+  position: relative;
+  transform: rotate(0deg);
+  transition: 0.5s ease-in-out;
+}
+
+.menu-icon span {
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background: var(--primary);
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: 0.25s ease-in-out;
+}
+
+.menu-icon span:nth-child(1) {
+  top: 0px;
+}
+
+.menu-icon span:nth-child(2), .menu-icon span:nth-child(3) {
+  top: 9px;
+}
+
+.menu-icon span:nth-child(4) {
+  top: 18px;
+}
+
+.menu-open .menu-icon span:nth-child(1) {
+  top: 9px;
+  width: 0%;
+  left: 50%;
+}
+
+.menu-open .menu-icon span:nth-child(2) {
+  transform: rotate(45deg);
+}
+
+.menu-open .menu-icon span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+.menu-open .menu-icon span:nth-child(4) {
+  top: 9px;
+  width: 0%;
+  left: 50%;
+}
+
+/* Mobile menu overlay */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.98);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+  transition: right 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.mobile-nav.open {
+  right: 0;
+}
+
+.mobile-nav a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  color: var(--primary);
+  text-decoration: none;
+  margin: var(--space-sm) 0;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  transform: translateY(50px);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.mobile-nav.open a {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.mobile-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--primary);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s ease;
+}
+
+.mobile-nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Staggered animation for menu items */
+.mobile-nav.open a:nth-child(1) { transition-delay: 0.1s; }
+.mobile-nav.open a:nth-child(2) { transition-delay: 0.2s; }
+.mobile-nav.open a:nth-child(3) { transition-delay: 0.3s; }
+.mobile-nav.open a:nth-child(4) { transition-delay: 0.4s; }
+
+/* Hero Section with animated elements */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 0 auto;
+  padding: var(--space-xl) var(--space-md);
+  text-align: center;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  padding: 0 var(--space-md);
+  max-width: 900px;
+  margin: 0 auto;
+  animation: fadeIn 1.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-text h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: var(--h1-size);
+  color: var(--text-light);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.hero-text h1::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background-color: var(--accent);
+  margin: var(--space-sm) auto 0;
+  transform: scaleX(0);
+  animation: lineExpand 1.2s ease forwards 0.8s;
+}
+
+@keyframes lineExpand {
+  to { transform: scaleX(1); }
+}
+
+.hero-text p {
+  font-size: var(--body-large);
+  color: var(--text-light);
+  max-width: 700px;
+  line-height: 1.8;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 1.5s ease forwards 0.5s;
+  opacity: 0;
+}
+
+/* Fancy animated button */
+.shop-button {
+  position: relative;
+  padding: 0.875rem 2.5rem;
+  font-size: var(--body);
+  font-weight: 500;
+  letter-spacing: 1px;
+  border: none;
+  border-radius: 50px;
+  color: var(--text-light);
+  background-color: var(--primary);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeIn 1.5s ease forwards 1s;
+  opacity: 0;
+  z-index: 1;
+  box-shadow: 0 4px 20px rgba(141, 91, 76, 0.3);
+}
+
+.shop-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.7s ease;
+  z-index: -1;
+}
+
+.shop-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(141, 91, 76, 0.4);
+}
+
+.shop-button:hover::before {
+  left: 100%;
+}
+
+.shop-button:active {
+  transform: translateY(-1px);
+}
+
+/* Floating tea leaves animation */
+.floating-elements {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.tea-leaf {
+  position: absolute;
+  width: 30px;
+  height: 50px;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 167"><path fill="%238D5B4C" d="M50 0C22.4 0 0 37.3 0 83.3c0 46.1 22.4 83.3 50 83.3s50-37.3 50-83.3C100 37.3 77.6 0 50 0zm0 125c-16.6 0-30-18.7-30-41.7S33.4 41.7 50 41.7s30 18.7 30 41.7S66.6 125 50 125z"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.15;
+  animation: floating 20s linear infinite;
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(-100px) rotate(0deg) scale(0.7);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.15;
+  }
+  90% {
+    opacity: 0.15;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Generate multiple tea leaves with different animations */
+.tea-leaf:nth-child(1) {
+  left: 10%;
+  animation-duration: 15s;
+  animation-delay: 0s;
+}
+
+.tea-leaf:nth-child(2) {
+  left: 30%;
+  animation-duration: 18s;
+  animation-delay: 2s;
+}
+
+.tea-leaf:nth-child(3) {
+  left: 50%;
+  animation-duration: 21s;
+  animation-delay: 5s;
+}
+
+.tea-leaf:nth-child(4) {
+  left: 70%;
+  animation-duration: 14s;
+  animation-delay: 1s;
+}
+
+.tea-leaf:nth-child(5) {
+  left: 85%;
+  animation-duration: 17s;
+  animation-delay: 3s;
+}
+
+/* Tea Collection Section with scroll reveal */
+.tea-collection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background);
+  gap: var(--space-lg);
+  padding: var(--space-xl) var(--space-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.tea-collection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary-light), var(--accent), var(--primary-light));
+}
+
+.section-header {
+  text-align: center;
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.section-header.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tea-collection h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: var(--h2-size);
+  color: var(--primary);
+  margin-bottom: var(--space-sm);
+  position: relative;
+  display: inline-block;
+}
+
+.tea-collection h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  width: 60px;
+  height: 2px;
+  background-color: var(--accent);
+  transform: translateX(-50%);
+}
+
+.section-subtitle {
+  font-size: var(--body);
+  color: var(--text-dark);
+  max-width: 700px;
+  margin: var(--space-sm) auto 0;
+}
+
+/* Tea cards with hover effects and animations */
+.tea-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.tea-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  padding: var(--space-md);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+  transform: translateY(50px);
+  opacity: 0;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              opacity 0.8s ease,
+              box-shadow 0.5s ease;
+}
+
+.tea-card.revealed {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.tea-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary-light), var(--primary));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.tea-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  transform: translateY(-5px) scale(1.02);
+}
+
+.tea-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Staggered reveal animation for cards */
+.tea-card:nth-child(1) { transition-delay: 0.1s; }
+.tea-card:nth-child(2) { transition-delay: 0.2s; }
+.tea-card:nth-child(3) { transition-delay: 0.3s; }
+.tea-card:nth-child(4) { transition-delay: 0.4s; }
+.tea-card:nth-child(5) { transition-delay: 0.5s; }
+.tea-card:nth-child(6) { transition-delay: 0.6s; }
+
+.tea-card img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: var(--space-sm);
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.tea-card:hover img {
+  transform: scale(1.15) rotate(5deg);
+}
+
+.tea-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-bottom: var(--space-xs);
+  transition: color 0.3s ease;
+}
+
+.tea-card:hover h3 {
+  color: var(--primary-dark);
+}
+
+.tea-card p {
+  font-size: var(--body-small);
+  color: var(--text-dark);
+  max-width: 250px;
+  line-height: 1.6;
+}
+
+.tea-card-price {
+  font-weight: 600;
+  color: var(--primary);
+  margin-top: var(--space-sm);
+  font-size: var(--body);
+}
+
+.buy-button {
+  margin-top: var(--space-sm);
+  padding: 0.5rem 1.5rem;
+  background-color: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  border-radius: 50px;
+  font-size: var(--body-small);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.tea-card:hover .buy-button {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.buy-button:hover {
+  background-color: var(--primary);
+  color: var(--text-light);
+}
+
+/* Testimonials section with parallax scrolling */
+.testimonials {
+  background-color: var(--primary-light);
+  padding: var(--space-xl) var(--space-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonials::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.2"/></svg>');
+  background-size: 100px;
+  opacity: 0.1;
+}
+
+.testimonials h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: var(--h2-size);
+  color: var(--text-dark);
+  text-align: center;
+  margin-bottom: var(--space-lg);
+  position: relative;
+}
+
+.testimonials h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  width: 60px;
+  height: 2px;
+  background-color: var(--accent);
+  transform: translateX(-50%);
+}
+
+.testimonial-slider {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.testimonial-quote {
+  text-align: center;
+  padding: var(--space-md);
+}
+
+.testimonial-text {
+  font-size: var(--body-large);
+  font-style: italic;
+  color: var(--text-dark);
+  line-height: 1.8;
+  position: relative;
+  margin-bottom: var(--space-md);
+}
+
+.testimonial-text::before, .testimonial-text::after {
+  /* Using Unicode entities for opening and closing quotation marks */
+  position: absolute;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5rem;
+  color: var(--accent);
+  opacity: 0.3;
+}
+
+.testimonial-text::before {
+  content: '\201C'; /* Unicode for opening double quotation mark */
+  top: -40px;
+  left: -20px;
+}
+
+.testimonial-text::after {
+  content: '\201D'; /* Unicode for closing double quotation mark */
+  bottom: -70px;
+  right: -20px;
+}
+
+.testimonial-author {
+  font-weight: 600;
+  color: var(--primary-dark);
+  font-size: var(--body);
+}
+
+/* Footer with subtle animation */
+.footer {
+  background-color: var(--primary-dark);
+  color: var(--text-light);
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-light);
+  margin-bottom: var(--space-sm);
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.footer-nav a {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-nav a:hover {
+  color: var(--accent-light);
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  background-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+.copyright {
+  font-size: var(--body-small);
+  opacity: 0.7;
+}
+
+/* Scroll animation utility */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Utility class for staggered animations */
+.stagger-delay-1 { transition-delay: 0.1s; }
+.stagger-delay-2 { transition-delay: 0.2s; }
+.stagger-delay-3 { transition-delay: 0.3s; }
+.stagger-delay-4 { transition-delay: 0.4s; }
+
+/* Tablet Styles */
+@media screen and (min-width: 768px) {
+  .header {
+    padding: var(--space-sm) var(--space-lg);
+  }
+
+  .nav-menu {
+    display: flex;
+  }
+
+  .mobile-menu-btn {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: none;
+  }
+
+  .hero {
+    min-height: 80vh;
+  }
+
+  .tea-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+    width: 85%;
+  }
+
+  .footer-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+/* Desktop Styles */
+@media screen and (min-width: 1024px) {
+  .header {
+    padding: var(--space-sm) var(--space-xl);
+  }
+
+  .hero {
+    min-height: 90vh;
+  }
+
+  .tea-cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
+    width: 80%;
+  }
+}
+
+/* Large Desktop Styles */
+@media screen and (min-width: 1440px) {
+  .header {
+    padding: var(--space-md) 8rem;
+  }
+
+  .tea-cards {
+    width: 75%;
+    max-width: 1400px;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-light);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Animation to add at the end of document to ensure JavaScript works with it */
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+  }
+}
+
